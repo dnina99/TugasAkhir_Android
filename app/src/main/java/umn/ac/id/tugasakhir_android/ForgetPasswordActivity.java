@@ -7,19 +7,19 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-public class LoginActivity extends AppCompatActivity {
+public class ForgetPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_login);
-        Button forgetPass = findViewById(R.id.btnForgetPasswordLogin);
+        setContentView(R.layout.activity_forget_password);
+        Button cancel = findViewById(R.id.btnCancelForgetPass);
 
-        forgetPass.setOnClickListener(new View.OnClickListener() {
+        cancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent forgetPass = new Intent(getApplicationContext(), ForgetPasswordActivity.class);
-                startActivity(forgetPass);
+                Intent cancel = new Intent(getApplicationContext(), LoginActivity.class);
+                startActivity(cancel);
             }
         });
     }
