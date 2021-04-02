@@ -30,13 +30,13 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap){
-        // Assign variabel
-        gMap = googleMap;
+        LatLng sydney = new LatLng(-1.6234956291542146, 103.61601582805419);
+        googleMap.addMarker(new MarkerOptions()
+                .position(sydney)
+                .title("Lokasi Restoran FoodXPress"));
 
-        // Tambahkan marker
-        LatLng foodxpress = new LatLng(-1.5974365338998333, 103.62448445156222);
-        gMap.addMarker(new MarkerOptions().position(foodxpress).title("Lokasi Restoran"));
-        gMap.moveCamera(CameraUpdateFactory.newLatLng(foodxpress));
+        float zoomLevel = 16f; //This goes up to 21
+        googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(sydney, zoomLevel));
     }
 
 

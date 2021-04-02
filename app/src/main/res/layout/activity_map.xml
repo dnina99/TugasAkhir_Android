@@ -7,28 +7,30 @@
     tools:context=".MapActivity">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/imageViewss"
         android:layout_width="150dp"
         android:layout_height="150dp"
         app:srcCompat="@android:drawable/ic_menu_help"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="35dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/textViewss"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="FoodXpress - Location"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="130dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <fragment
         android:id="@+id/google_map"
         android:name="com.google.android.gms.maps.SupportMapFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp"/>
+        android:layout_marginTop="150dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
