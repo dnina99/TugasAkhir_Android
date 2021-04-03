@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ViewProfileActivity">
+
+    <TextView
+        android:id="@+id/textViewProfile"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="FoodXpress - Profile"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:gravity="center_horizontal" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/myProfile"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:layout_marginTop="32dp"
+        android:src="@drawable/ic_profile"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tv_nama_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Name"
+        android:layout_marginTop="250dp"
+        android:layout_marginLeft="40dp" />
+
+    <EditText
+        android:id="@+id/et_nama_profile"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="275dp"
+        android:background="@drawable/button"
+        android:hint="Namamu"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/tv_telp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Mobile Number"
+        android:layout_marginTop="330dp"
+        android:layout_marginLeft="40dp" />
+
+    <EditText
+        android:id="@+id/et_telp_profile"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="360dp"
+        android:background="@drawable/button"
+        android:hint="Mobile Number"
+        android:textAlignment="center" />
+
+    <TextView
+        android:id="@+id/tv_email_profile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Email Address"
+        android:layout_marginTop="410dp"
+        android:layout_marginLeft="40dp" />
+
+    <EditText
+        android:id="@+id/et_email_profile"
+        android:layout_width="330dp"
+        android:layout_height="30dp"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="440dp"
+        android:background="@drawable/button"
+        android:hint="Email Address"
+        android:textAlignment="center" />
+
+
+
+
+
+
+</RelativeLayout>
