@@ -13,7 +13,10 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasAkhir_Android">
-        <activity android:name=".RestoOrderDetailActivity"></activity>
+        <activity
+            android:name=".RestoHomeActivity"
+            android:label="@string/title_activity_resto_home"></activity>
+        <activity android:name=".RestoOrderDetailActivity" />
         <activity android:name=".RestoAddMenuActivity" />
         <activity android:name=".RestoEditMenuActivity" />
         <activity android:name=".RestoFoodDescriptionActivity" />
@@ -21,7 +24,6 @@
         <activity android:name=".RestoCompletedOrderActivity" />
         <activity android:name=".RestoOrderListActivity" />
         <activity android:name=".RestoNewApplicantActivity" />
-        <activity android:name=".RestoHomeActivity" />
         <activity android:name=".UserHistoryActivity" />
         <activity android:name=".UserCartActivity" />
         <activity android:name=".UserMenuDetailActivity" />
