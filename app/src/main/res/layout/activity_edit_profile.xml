@@ -2,7 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/view_profile_layout"
+    android:id="@+id/edit_profile_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewProfileActivity">
@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_nama_profile"
+        android:id="@+id/tv_nama_edit_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -40,7 +40,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_nama_profile"
+        android:id="@+id/et_nama_edit_profile"
         android:layout_width="330dp"
         android:layout_height="30dp"
         android:layout_marginLeft="40dp"
@@ -52,48 +52,71 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_telp"
+        android:id="@+id/tv_pass"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="330dp"
-        android:text="Mobile Number"
+        android:text="Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_telp_profile"
+        android:id="@+id/et_pass_profile"
         android:layout_width="330dp"
         android:layout_height="30dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="360dp"
         android:background="@drawable/button"
-        android:hint="Mobile Number"
+        android:hint="New Password"
+        android:inputType="textPassword"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tv_email_profile"
+        android:id="@+id/tv_retype_profile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="410dp"
-        android:text="Email Address"
+        android:text="Retype Password"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/et_email_profile"
+        android:id="@+id/et_retype_profile"
         android:layout_width="330dp"
         android:layout_height="30dp"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="440dp"
         android:background="@drawable/button"
-        android:hint="Email Address"
+        android:hint="Retype new password"
+        android:inputType="textPassword"
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <Button
+        android:id="@+id/edit_profile_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="40dp"
+        android:layout_marginTop="500dp"
+        android:text="Cancel Edit"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/edit_profile_save"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="220dp"
+        android:layout_marginTop="500dp"
+        android:text="Save Changes"
+        android:textAlignment="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
