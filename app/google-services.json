@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "171406167678",
+    "project_id": "umntugasakhirandroid",
+    "storage_bucket": "umntugasakhirandroid.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:171406167678:android:8cb297ba18cc82a3ac922f",
+        "android_client_info": {
+          "package_name": "umn.ac.id.tugasakhir_android"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "171406167678-006t8aqf36qvs159p176ud4sofq5q86o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAwQjzhboivQk_0B8x3aFjInXIlrgO6vHw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "171406167678-006t8aqf36qvs159p176ud4sofq5q86o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
