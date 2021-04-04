@@ -3,23 +3,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    app:startDestination="@+id/navigation_add_user">
 
     <fragment
-        android:id="@+id/navigation_home"
+        android:id="@+id/navigation_add_user"
         android:name="umn.ac.id.tugasakhir_android.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="@string/title_new_user"
+        tools:layout="@layout/activity_resto_new_applicant" />
 
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="umn.ac.id.tugasakhir_android.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
+        android:id="@+id/navigation_accepted_order"
+        android:name="umn.ac.id.tugasakhir_android.ui.home.HomeFragment"
+        android:label="@string/title_accepted_order"
+        tools:layout="@layout/activity_resto_order_list" />
 
     <fragment
-        android:id="@+id/navigation_notifications"
+        android:id="@+id/navigation_menu_list"
         android:name="umn.ac.id.tugasakhir_android.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:label="@string/title_menu_list"
+        tools:layout="@layout/activity_resto_menu_list" />
 </navigation>
