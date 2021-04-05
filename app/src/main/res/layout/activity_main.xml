@@ -5,12 +5,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/my_bg"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/btnRegister"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
+        android:fontFamily="NABILA.TTF"
         android:text="Don't Have \nan Account?"
         app:layout_constraintEnd_toStartOf="@+id/imageRegister"
         app:layout_constraintHorizontal_bias="0.797"
