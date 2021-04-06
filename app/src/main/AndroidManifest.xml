@@ -14,13 +14,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasAkhir_Android">
         <activity
-            android:name=".RestoHomeActivity"
-            android:label="@string/title_activity_resto_home">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:name=".RestoHomeActivity">
         </activity>
         <activity android:name=".RestoOrderDetailActivity" />
         <activity android:name=".RestoAddMenuActivity" />
