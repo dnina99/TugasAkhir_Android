@@ -1,0 +1,48 @@
+{
+  "User": {
+    "yona" : {
+      "Name" : "Yonathan",
+      "Email" : "Yonathan@gmail.com",
+      "mobileNumber" : "55555555",
+      "Password" : "Yonathan"
+    }
+  },
+  "Category" : {
+    "01" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "FINGER FOOD"
+    },
+    "02" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "WESTERN FOOD"
+    },
+    "03" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "INDONESIAN FOOD"
+    },
+    "04" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "EASTERN FOOD"
+    },
+    "05" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "INDIAN FOOD"
+    },
+    "06" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "VEGETARIAN FOOD"
+    },
+    "07" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "FAST FOOD"
+    },
+    "08" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "SNACKS"
+    },
+    "09" : {
+      "Image" : "https://drive.google.com/file/d/1snBGk_i5fb0AgcHb6oRfHhTvGhkVB4ya/view?usp=sharing",
+      "Name" : "SANDWICH"
+    }
+  }
+}

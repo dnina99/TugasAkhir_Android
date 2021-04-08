@@ -3,6 +3,7 @@ package umn.ac.id.tugasakhir_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.common.internal.service.Common;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -18,20 +20,22 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
 import java.util.Map;
 
+import umn.ac.id.tugasakhir_android.model.User;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    public static final String TAG = "TAG";
-    FirebaseFirestore store;
-    FirebaseAuth auth;
-    String userID;
+    String mobileNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,10 +51,8 @@ public class RegisterActivity extends AppCompatActivity {
         EditText etUsername = findViewById(R.id.etUsernameRegister);
         EditText etPassword = findViewById(R.id.etPasswordRegister);
 
-        auth = FirebaseAuth.getInstance();
-        store = FirebaseFirestore.getInstance();
-
-
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_user = database.getReference("User");
 
         cancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -63,54 +65,45 @@ public class RegisterActivity extends AppCompatActivity {
         register.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String fullName = etFullName.getText().toString();
-                final String email = etEmail.getText().toString().trim();
-                final String mobileNumber = etMobileNumber.getText().toString().trim();
-                final String username = etUsername.getText().toString().trim();
-                final String password = etPassword.getText().toString().trim();
+                String primaryKey = etUsername.getText().toString();
+                if (primaryKey.isEmpty()) {
+                    etUsername.setError("Username is Required");
+                    etUsername.requestFocus();
+                    return;
+                }
 
-                auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
+                mDialog.show();
+
+                table_user.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            FirebaseUser fuser = auth.getCurrentUser();
-                            fuser.sendEmailVerification().addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Toast.makeText(RegisterActivity.this, "Verification Email Has been Sent.", Toast.LENGTH_SHORT).show();
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "onFailure: Email not sent " + e.getMessage());
-                                }
-                            });
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        // check if user already exits  through phone number
+                        if (dataSnapshot.child(etUsername.getText().toString()).exists()) {
+                            mDialog.dismiss();
+                            Toast.makeText(RegisterActivity.this, "Username Taken", Toast.LENGTH_SHORT).show();
+                        } else {
+                            mDialog.dismiss();
+                            User user = new User(
+                                    etUsername.getText().toString(),
+                                    etPassword.getText().toString(),
+                                    etFullName.getText().toString(),
+                                    etEmail.getText().toString(),
+                                    etMobileNumber.getText().toString()
 
-                            Toast.makeText(RegisterActivity.this, "User Created.", Toast.LENGTH_SHORT).show();
-                            userID = auth.getCurrentUser().getUid();
-                            DocumentReference documentReference = store.collection("users").document(userID);
-                            Map<String,Object> user = new HashMap<>();
-                            user.put("fName",fullName);
-                            user.put("email",email);
-                            user.put("phone",mobileNumber);
-                            user.put("uName",username);
-                            documentReference.set(user).addOnSuccessListener(new OnSuccessListener<Void>() {
-                                @Override
-                                public void onSuccess(Void aVoid) {
-                                    Log.d(TAG, "onSuccess: user Profile is created for "+ userID);
-                                }
-                            }).addOnFailureListener(new OnFailureListener() {
-                                @Override
-                                public void onFailure(@NonNull Exception e) {
-                                    Log.d(TAG, "onFailure: " + e.toString());
-                                }
-                            });
-                            startActivity(new Intent(getApplicationContext(),MainActivity.class));
-                        }else {
-                            Toast.makeText(RegisterActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                            );
+                            table_user.child(etUsername.getText().toString()).setValue(user);
+                            Toast.makeText(RegisterActivity.this, "Sign Up Successfully", Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
                 });
+
             }
         });
     }

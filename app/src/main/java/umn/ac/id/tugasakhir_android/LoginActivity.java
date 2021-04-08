@@ -3,6 +3,7 @@ package umn.ac.id.tugasakhir_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -14,11 +15,17 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import umn.ac.id.tugasakhir_android.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-    FirebaseAuth auth;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,27 +33,41 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         Button forgetPass = findViewById(R.id.btnForgetPasswordLogin);
         Button login = findViewById(R.id.btnLoginLogin);
-        EditText etEmail = findViewById(R.id.etUsernameLogin);
+        EditText etUsername = findViewById(R.id.etUsernameLogin);
         EditText etPassword = findViewById(R.id.etPasswordLogin);
 
-        auth = FirebaseAuth.getInstance();
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_user = database.getReference("User");
 
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = etEmail.getText().toString().trim();
-                String password = etPassword.getText().toString().trim();
+                final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
+                mDialog.show();
 
-                auth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                table_user.addValueEventListener(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            Toast.makeText(LoginActivity.this, "Logged in Successfully", Toast.LENGTH_SHORT).show();
-                            startActivity(new Intent(getApplicationContext(),RestoHomeActivity.class));
-                        }else {
-                            Toast.makeText(LoginActivity.this, "Error ! " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        // check if user already exits  through phone number
+                        if (dataSnapshot.child(etUsername.getText().toString()).exists()) {
+                            mDialog.dismiss();
+                            User user = dataSnapshot.child(etUsername.getText().toString()).getValue(User.class);
+                            if(user.getPassword().equals(etPassword.getText().toString())){
+                                Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
+                                Intent home = new Intent(getApplicationContext(), RestoHomeActivity.class);
+                                startActivity(home);
+                            }else{
+                                Toast.makeText(LoginActivity.this, "Password Incorect", Toast.LENGTH_SHORT).show();
+                            }
+                        } else {
+                            mDialog.dismiss();
+                            Toast.makeText(LoginActivity.this, "Have you register?", Toast.LENGTH_SHORT).show();
                         }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
                     }
                 });
             }
