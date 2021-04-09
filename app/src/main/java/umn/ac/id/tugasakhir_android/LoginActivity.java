@@ -21,6 +21,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import umn.ac.id.tugasakhir_android.Common.Common;
 import umn.ac.id.tugasakhir_android.model.User;
 
 public class LoginActivity extends AppCompatActivity {
@@ -54,8 +55,10 @@ public class LoginActivity extends AppCompatActivity {
                             User user = dataSnapshot.child(etUsername.getText().toString()).getValue(User.class);
                             if(user.getPassword().equals(etPassword.getText().toString())){
                                 Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                Intent home = new Intent(getApplicationContext(), RestoHomeActivity.class);
+                                Intent home = new Intent(getApplicationContext(), Home.class);
+                                Common.currentUser = user;
                                 startActivity(home);
+                                finish();
                             }else{
                                 Toast.makeText(LoginActivity.this, "Password Incorect", Toast.LENGTH_SHORT).show();
                             }
