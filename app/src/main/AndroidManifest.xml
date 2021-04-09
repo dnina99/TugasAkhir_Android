@@ -13,11 +13,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasAkhir_Android">
+        <activity android:name=".FoodList"></activity>
         <activity
             android:name=".Home"
             android:label="@string/title_activity_home"
-            android:theme="@style/Theme.TugasAkhir_Android.NoActionBar"></activity>
-        <activity android:name=".RestoHomeActivity"></activity>
+            android:theme="@style/Theme.TugasAkhir_Android.NoActionBar" />
+        <activity android:name=".RestoHomeActivity" />
         <activity android:name=".RestoOrderDetailActivity" />
         <activity android:name=".RestoAddMenuActivity" />
         <activity android:name=".RestoEditMenuActivity" />

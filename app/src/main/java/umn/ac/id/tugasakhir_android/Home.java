@@ -49,6 +49,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
+    FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -101,7 +102,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         .setQuery(category, Category.class)
                         .build();
 
-        FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull final MenuViewHolder menuViewHolder, int i,
                                             @NonNull final Category category) {
@@ -110,15 +111,15 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                 Picasso.get().load(category.getImage()).placeholder(R.drawable.loading).fit().into(menuViewHolder.imageView);
 
                 menuViewHolder.txtMenuName.setText(category.getName());
-//                final Category clickItem = category;
+                final Category clickItem = category;
                 menuViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        // get category id and send it to the new activity.
-                        //Intent foodIntent = new Intent(Home.this, FoodList.class);
-                        // category id is key,we just get the key of this item
-                        //foodIntent.putExtra("CategoryId", adapter.getRef(position).getKey());
-                        //startActivity(foodIntent);
+                        // Masukkan kategori id ke food list class
+                        Intent foodIntent = new Intent(Home.this, FoodList.class);
+                        // Asumsi kategori key ini adalah foreign key sebagai reference saja
+                        foodIntent.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        startActivity(foodIntent);
                     }
                 });
             }
