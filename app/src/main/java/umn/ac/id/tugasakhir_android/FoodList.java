@@ -43,7 +43,7 @@ public class FoodList extends AppCompatActivity {
         foodList = database.getReference("Food");
 
         recyclerView = (RecyclerView)findViewById(R.id.recycler_food);
-        recyclerView.setHasFixedSize(true);
+        recyclerView.hasFixedSize();
         layoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(layoutManager);
 
@@ -57,7 +57,7 @@ public class FoodList extends AppCompatActivity {
 
     private void loadListFood(String categoryId){
         FirebaseRecyclerOptions<Food> options =
-                new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("MenuId").equalTo(categoryId), Food.class).build();
+                new FirebaseRecyclerOptions.Builder<Food>().build();
 
         FirebaseRecyclerAdapter<Food,FoodViewHolder> adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
             @Override
@@ -66,8 +66,7 @@ public class FoodList extends AppCompatActivity {
                 Picasso.get().load(food.getImage()).into(foodViewHolder.food_image);
 
                 //Log.d("TAG", "Check category " +categoryId);
-                Log.d("TAG", "Nama " +food.getName());
-                Log.d("TAG", "Link " +food.getImage());
+                Log.d("TAG", "MenuID " +food.getMenuId());
 
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override

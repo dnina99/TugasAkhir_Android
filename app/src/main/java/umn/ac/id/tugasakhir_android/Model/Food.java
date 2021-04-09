@@ -2,15 +2,15 @@ package umn.ac.id.tugasakhir_android.Model;
 
 public class Food {
 
-    private String name, image, description, price, discount, MenuId;
+    private String Name, Image, description, price, discount, MenuId;
 
     public Food() {
 
     }
 
     public Food(String description, String discount, String image, String MenuId, String name, String price) {
-        this.name = name;
-        this.image = image;
+        this.Name = name;
+        this.Image = image;
         this.description = description;
         this.price = price;
         this.discount = discount;
@@ -18,19 +18,19 @@ public class Food {
     }
 
     public String getName() {
-        return name;
+        return Name;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.Name = name;
     }
 
     public String getImage() {
-        return image;
+        return Image;
     }
 
     public void setImage(String image) {
-        this.image = image;
+        this.Image = image;
     }
 
     public String getDescription() {
