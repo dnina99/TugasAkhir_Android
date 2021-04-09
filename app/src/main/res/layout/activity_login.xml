@@ -16,7 +16,7 @@
         app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@android:drawable/ic_menu_help" />
+        app:srcCompat="@drawable/ic_logo" />
 
     <TextView
         android:id="@+id/textView"
@@ -24,6 +24,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="FoodXpress - Login"
+        android:textStyle="bold"
+        android:textSize="24dp"
+        android:textColor="@color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
@@ -35,6 +38,8 @@
         android:layout_marginTop="96dp"
         android:ems="10"
         android:hint="Username"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.491"
@@ -47,6 +52,8 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:hint="Password"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
         android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -58,6 +65,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
         android:layout_marginEnd="28dp"
+        android:backgroundTint="@color/teal_700"
         android:text="Login"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
@@ -68,7 +76,8 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
         android:layout_marginTop="20dp"
-        android:text="Forget Password"
+        android:text="Forget\n Password"
+        android:backgroundTint="@color/teal_700"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/etPasswordLogin" />
 </androidx.constraintlayout.widget.ConstraintLayout>
