@@ -56,7 +56,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Menu");
+        //toolbar.setTitle("Menu");
         setSupportActionBar(toolbar);
 
         //Init Firebase yang digunakan
@@ -101,27 +101,38 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
                         .setQuery(category, Category.class)
                         .build();
 
-        FirebaseRecyclerAdapter adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
-            public MenuViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-                View view = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.menu_item, parent, false);
-                return new MenuViewHolder(view);
-            }
-
+        FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter = new FirebaseRecyclerAdapter<Category, MenuViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(MenuViewHolder holder, int position, Category model) {
-                holder.txtMenuName.setText(model.getName());
-                Picasso.with(getBaseContext()).load(model.getName()).into(holder.imageView);
-                final Category clickItem = model;
-                holder.setItemClickListener(new ItemClickListener() {
+            protected void onBindViewHolder(@NonNull final MenuViewHolder menuViewHolder, int i,
+                                            @NonNull final Category category) {
+
+
+                Picasso.get().load(category.getImage()).placeholder(R.drawable.loading).fit().into(menuViewHolder.imageView);
+
+                menuViewHolder.txtMenuName.setText(category.getName());
+//                final Category clickItem = category;
+                menuViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        Toast.makeText(Home.this, ""+clickItem.getName(),Toast.LENGTH_SHORT).show();
-
+                        // get category id and send it to the new activity.
+                        //Intent foodIntent = new Intent(Home.this, FoodList.class);
+                        // category id is key,we just get the key of this item
+                        //foodIntent.putExtra("CategoryId", adapter.getRef(position).getKey());
+                        //startActivity(foodIntent);
                     }
                 });
             }
+
+
+            @NonNull
+            @Override
+            public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_item, parent, false);
+                return new MenuViewHolder(view);
+            }
         };
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
         recycler_menu.setAdapter(adapter);
     }
 
