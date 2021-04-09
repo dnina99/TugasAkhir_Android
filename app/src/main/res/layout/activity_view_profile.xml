@@ -30,7 +30,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvNameProfile"
+        android:id="@+id/tvNameProfileJudul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -39,8 +39,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/etNamaProfile"
+    <TextView
+        android:id="@+id/tvNameProfile"
         android:layout_width="330dp"
         android:layout_height="30dp"
         android:layout_marginLeft="40dp"
@@ -52,7 +52,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvMobileNumberProfile"
+        android:id="@+id/tvMobileNumberProfileJudul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -61,8 +61,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_telp_profile"
+    <TextView
+        android:id="@+id/tvMobileNumberProfile"
         android:layout_width="330dp"
         android:layout_height="30dp"
         android:layout_marginLeft="40dp"
@@ -74,7 +74,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/tvEmailProfile"
+        android:id="@+id/tvEmailProfileJudul"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
@@ -83,8 +83,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <EditText
-        android:id="@+id/et_email_profile"
+    <TextView
+        android:id="@+id/tvEmailProfile"
         android:layout_width="330dp"
         android:layout_height="30dp"
         android:layout_marginLeft="40dp"
