@@ -189,7 +189,11 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             //Intent orderIntent = new Intent(Home.this, OrderStatus.class);
             //startActivity(orderIntent);
 
-        } else if (id == R.id.nav_log_out) {
+        }else if (id == R.id.nav_profile){
+            Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
+            //Common.currentUser = user;
+            startActivity(profile);
+        }else if (id == R.id.nav_log_out) {
 
             // delete remember user and password
             Paper.book().destroy();

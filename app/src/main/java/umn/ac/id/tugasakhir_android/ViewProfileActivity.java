@@ -8,6 +8,13 @@ import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.EditText;
+import android.widget.TextView;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import umn.ac.id.tugasakhir_android.Common.Common;
 
 public class ViewProfileActivity extends AppCompatActivity {
 
@@ -19,6 +26,18 @@ public class ViewProfileActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setTitle("Profile");
         getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+
+        TextView tvName = findViewById(R.id.tvNameProfile);
+        TextView tvMobileNumber = findViewById(R.id.tvMobileNumberProfile);
+        TextView tvEmail = findViewById(R.id.tvEmailProfile);
+
+        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        final DatabaseReference table_user = database.getReference("User");
+
+        tvName.setText(Common.currentUser.getName());
+        tvMobileNumber.setText(Common.currentUser.getMobileNumber());
+        tvEmail.setText(Common.currentUser.getEmail());
+
     }
 
     @Override
