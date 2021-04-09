@@ -26,8 +26,6 @@ import umn.ac.id.tugasakhir_android.model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -55,9 +53,15 @@ public class LoginActivity extends AppCompatActivity {
                             User user = dataSnapshot.child(etUsername.getText().toString()).getValue(User.class);
                             if(user.getPassword().equals(etPassword.getText().toString())){
                                 Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
-                                Intent home = new Intent(getApplicationContext(), Home.class);
-                                Common.currentUser = user;
-                                startActivity(home);
+                                if(user.getUsername().equals("admin".toString())){
+                                    Intent resto = new Intent(getApplicationContext(), EditProfileActivity.class); //sementara resto home rusak.
+                                    Common.currentUser = user;
+                                    startActivity(resto);
+                                }else{
+                                    Intent home = new Intent(getApplicationContext(), Home.class);
+                                    Common.currentUser = user;
+                                    startActivity(home);
+                                }
                                 finish();
                             }else{
                                 Toast.makeText(LoginActivity.this, "Password Incorect", Toast.LENGTH_SHORT).show();
@@ -81,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent forgetPass = new Intent(getApplicationContext(), ForgetPasswordActivity.class);
                 startActivity(forgetPass);
+
             }
         });
     }
