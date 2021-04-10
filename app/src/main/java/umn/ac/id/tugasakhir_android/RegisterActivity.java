@@ -31,7 +31,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.util.HashMap;
 import java.util.Map;
 
-import umn.ac.id.tugasakhir_android.model.User;
+import umn.ac.id.tugasakhir_android.Model.User;
 
 public class RegisterActivity extends AppCompatActivity {
 

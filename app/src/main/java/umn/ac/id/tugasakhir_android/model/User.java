@@ -1,4 +1,4 @@
-package umn.ac.id.tugasakhir_android.model;
+package umn.ac.id.tugasakhir_android.Model;
 
 public class User {
     private String username;
