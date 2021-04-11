@@ -59,7 +59,7 @@ public class FoodList extends AppCompatActivity {
         FirebaseRecyclerOptions<Food> options =
                 new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("MenuId").equalTo(categoryId), Food.class).build();
 
-        FirebaseRecyclerAdapter<Food,FoodViewHolder> adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull FoodViewHolder foodViewHolder, int i, @NonNull final Food food) {
                 foodViewHolder.food_name.setText(food.getName());
@@ -71,10 +71,10 @@ public class FoodList extends AppCompatActivity {
                 foodViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
-                        // Start activity of food details
-                        //Intent foodDetails = new Intent(FoodList.this, FoodDetails.class);
-                        //foodDetails.putExtra("FoodId", adapter.getRef(position).getKey()); //send FoodId to new Activity
-                        //startActivity(foodDetails);
+                        // Pindah activity
+                        Intent foodDetails = new Intent(FoodList.this, FoodDetail.class);
+                        foodDetails.putExtra("FoodId", adapter.getRef(position).getKey()); //send FoodId to new Activity
+                        startActivity(foodDetails);
                     }
                 });
 
@@ -89,7 +89,7 @@ public class FoodList extends AppCompatActivity {
 
             @Override
             public void onDataChanged() {
-                // do your thing
+                // Cek data dari Firebase Database masuk ga ke recycler view
                 if(getItemCount() == 0)
                     Toast.makeText(getApplicationContext(), "Gak ada data", Toast.LENGTH_SHORT).show();
             }
