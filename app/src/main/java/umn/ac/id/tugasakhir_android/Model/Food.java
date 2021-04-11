@@ -2,7 +2,7 @@ package umn.ac.id.tugasakhir_android.Model;
 
 public class Food {
 
-    private String Name, Image, description, price, discount, MenuId;
+    private String Name, Image, Description, Price, discount, MenuId;
 
     public Food() {
 
@@ -11,8 +11,8 @@ public class Food {
     public Food(String description, String discount, String image, String MenuId, String name, String price) {
         this.Name = name;
         this.Image = image;
-        this.description = description;
-        this.price = price;
+        this.Description = description;
+        this.Price = price;
         this.discount = discount;
         this.MenuId = MenuId;
     }
@@ -34,19 +34,19 @@ public class Food {
     }
 
     public String getDescription() {
-        return description;
+        return Description;
     }
 
     public void setDescription(String description) {
-        this.description = description;
+        this.Description = description;
     }
 
     public String getPrice() {
-        return price;
+        return Price;
     }
 
     public void setPrice(String price) {
-        this.price = price;
+        this.Price = price;
     }
 
     public String getDiscount() {
