@@ -18,7 +18,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import umn.ac.id.tugasakhir_android.Common.Common;
-import umn.ac.id.tugasakhir_android.model.User;
+import umn.ac.id.tugasakhir_android.Model.User;
 
 public class ForgetPasswordActivity extends AppCompatActivity {
 

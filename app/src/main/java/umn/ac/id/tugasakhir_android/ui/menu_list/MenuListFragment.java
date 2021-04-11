@@ -1,4 +1,4 @@
-package umn.ac.id.tugasakhir_android.ui.dashboard;
+package umn.ac.id.tugasakhir_android.ui.menu_list;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -14,15 +14,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import umn.ac.id.tugasakhir_android.R;
 
-public class DashboardFragment extends Fragment {
+public class MenuListFragment extends Fragment {
 
-    private DashboardViewModel dashboardViewModel;
+    private MenuListViewModel dashboardViewModel;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_dashboard, container, false);
+                new ViewModelProvider(this).get(MenuListViewModel.class);
+        View root = inflater.inflate(R.layout.fragment_menu_list, container, false);
         final TextView textView = root.findViewById(R.id.text_dashboard);
         dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
             @Override

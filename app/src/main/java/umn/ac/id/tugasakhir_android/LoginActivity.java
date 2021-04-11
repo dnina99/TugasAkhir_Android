@@ -22,7 +22,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import umn.ac.id.tugasakhir_android.Common.Common;
-import umn.ac.id.tugasakhir_android.model.User;
+import umn.ac.id.tugasakhir_android.Model.User;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                             if(user.getPassword().equals(etPassword.getText().toString())){
                                 Toast.makeText(LoginActivity.this, "Login Successfully", Toast.LENGTH_SHORT).show();
                                 if(user.getUsername().equals("admin".toString())){
-                                    Intent resto = new Intent(getApplicationContext(), EditProfileActivity.class); //sementara resto home rusak.
+                                    Intent resto = new Intent(getApplicationContext(), RestoHomeActivity.class); //sementara resto home rusak.
                                     Common.currentUser = user;
                                     startActivity(resto);
                                 }else{
