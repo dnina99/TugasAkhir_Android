@@ -4,6 +4,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -43,7 +44,7 @@ public class FoodDetail extends AppCompatActivity {
 
         // Init Firebase
         database = FirebaseDatabase.getInstance();
-        foods = database.getReference("Foods");
+        foods = database.getReference("Food");
 
         //init view
         numberButton = findViewById(R.id.number_button);
@@ -72,6 +73,7 @@ public class FoodDetail extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 currentFood = dataSnapshot.getValue(Food.class);
 
+                Log.d("TAG", "FoodID " +foodId);
                 // setting the image from firebase into appbar;
                 Picasso.get().load(currentFood.getImage()).into(food_image);
                 //set title in appbar
