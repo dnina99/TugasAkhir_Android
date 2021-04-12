@@ -89,7 +89,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     etPassword.getText().toString(),
                                     etFullName.getText().toString(),
                                     etEmail.getText().toString(),
-                                    etMobileNumber.getText().toString()
+                                    etMobileNumber.getText().toString(),
+                                    "default.jpg"
 
                             );
                             table_user.child(etUsername.getText().toString()).setValue(user);
