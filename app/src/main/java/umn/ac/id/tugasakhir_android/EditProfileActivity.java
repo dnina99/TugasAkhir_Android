@@ -4,12 +4,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -27,7 +29,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FileDownloadTask;
 import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.IOException;
@@ -41,6 +45,7 @@ public class EditProfileActivity extends AppCompatActivity {
     ImageView ivPicture;
     public Uri imageUri;
     StorageReference folder;
+    DatabaseReference table_user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,13 +54,13 @@ public class EditProfileActivity extends AppCompatActivity {
         EditText etName = findViewById(R.id.etNameEditProfile);
         EditText etPasswrod = findViewById(R.id.etPasswordEditProfile);
         EditText etRetype = findViewById(R.id.etRetypeEditProfile);
-        ImageView ivPicture = findViewById(R.id.ivPictureEditProfile);
+        ivPicture = findViewById(R.id.ivPictureEditProfile);
         Button btnSave = findViewById(R.id.btnSaveEditProfile);
         Button btnCancel = findViewById(R.id.btnCancelEditProfile);
         ImageButton btnCamera = findViewById(R.id.btnPictureEditProfile);
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
-        final DatabaseReference table_user = database.getReference("User");
+        table_user = database.getReference("User");
         StorageReference storage = FirebaseStorage.getInstance().getReference().child("User/"+Common.currentUser.getPicture());
         folder = FirebaseStorage.getInstance().getReference();
 
@@ -121,9 +126,9 @@ public class EditProfileActivity extends AppCompatActivity {
         btnCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
+                Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+                //intent.setType("image/*");
+                //intent.setAction(Intent.ACTION_PICK);
                 startActivityForResult(intent, 1);
             }
         });
@@ -133,14 +138,46 @@ public class EditProfileActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 1 && resultCode == RESULT_OK && data != null && data.getData() != null){
+        if(requestCode == 1 && resultCode == Activity.RESULT_OK){
             imageUri = data.getData();
+            //Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.my_image);
+            ivPicture.setImageURI(imageUri);
+
+
             //ivPicture.setImageURI(imageUri);
-            //Bitmap bitmap = BitmapFactory.decodeFile(data.getData().toString());
-            //ivPicture.setImageBitmap(bitmap);
+///////////////////
+            final ProgressDialog pd = new ProgressDialog(this);
+            pd.setTitle("Uploading Image...");
+            pd.show();
+
             final String randomKey = UUID.randomUUID().toString();
             StorageReference upload = folder.child("User/" + randomKey + ".jpg");
-            upload.putFile(imageUri);
+            //StorageReference temp = FirebaseStorage.getInstance().getReference().child("User/" + randomKey + ".jpg");
+
+            upload.putFile(imageUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            pd.dismiss();
+                            Toast.makeText(EditProfileActivity.this, "Upload Success", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(EditProfileActivity.this, "Upload Failed", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(@NonNull UploadTask.TaskSnapshot snapshot) {
+                            double progress = (100.00 * snapshot.getBytesTransferred() / snapshot.getTotalByteCount());
+                            pd.setMessage("Progress : " + (int) progress + "%");
+                        }
+            });
+////////////////
+
+
         }
     }
 
