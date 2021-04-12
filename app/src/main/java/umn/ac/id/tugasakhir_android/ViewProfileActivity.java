@@ -46,7 +46,7 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
-        storage = FirebaseStorage.getInstance().getReference().child("User/"+Common.currentUser.getPicture());
+        storage = FirebaseStorage.getInstance().getReference().child("User/" + Common.currentUser.getPicture());
 
         tvName.setText(Common.currentUser.getName());
         tvMobileNumber.setText(Common.currentUser.getMobileNumber());

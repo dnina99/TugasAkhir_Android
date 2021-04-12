@@ -46,6 +46,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public Uri imageUri;
     StorageReference folder;
     DatabaseReference table_user;
+    String randomKey;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,7 @@ public class EditProfileActivity extends AppCompatActivity {
                             Toast.makeText(EditProfileActivity.this, "Your Password has been Changed", Toast.LENGTH_SHORT).show();
                             table_user.child(Common.currentUser.getUsername()).child("password").setValue(etPasswrod.getText().toString());
                             table_user.child(Common.currentUser.getUsername()).child("name").setValue(etName.getText().toString());
+                            table_user.child(Common.currentUser.getUsername()).child("picture").setValue(randomKey.toString() + ".jpg");
                             Intent home = new Intent(getApplicationContext(), Home.class);
                             Common.currentUser = user;
                             startActivity(home);
@@ -140,19 +142,14 @@ public class EditProfileActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 1 && resultCode == Activity.RESULT_OK){
             imageUri = data.getData();
-            //Bitmap bitmap = BitmapFactory.decodeResource(this.getResources(), R.drawable.my_image);
             ivPicture.setImageURI(imageUri);
 
-
-            //ivPicture.setImageURI(imageUri);
-///////////////////
             final ProgressDialog pd = new ProgressDialog(this);
             pd.setTitle("Uploading Image...");
             pd.show();
 
-            final String randomKey = UUID.randomUUID().toString();
+            randomKey = UUID.randomUUID().toString();
             StorageReference upload = folder.child("User/" + randomKey + ".jpg");
-            //StorageReference temp = FirebaseStorage.getInstance().getReference().child("User/" + randomKey + ".jpg");
 
             upload.putFile(imageUri)
                     .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -165,6 +162,7 @@ public class EditProfileActivity extends AppCompatActivity {
                     .addOnFailureListener(new OnFailureListener() {
                         @Override
                         public void onFailure(@NonNull Exception e) {
+                            pd.dismiss();
                             Toast.makeText(EditProfileActivity.this, "Upload Failed", Toast.LENGTH_SHORT).show();
                         }
                     })
@@ -175,8 +173,6 @@ public class EditProfileActivity extends AppCompatActivity {
                             pd.setMessage("Progress : " + (int) progress + "%");
                         }
             });
-////////////////
-
 
         }
     }
