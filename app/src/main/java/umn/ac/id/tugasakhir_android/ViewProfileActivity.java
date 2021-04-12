@@ -29,7 +29,7 @@ import java.io.IOException;
 import umn.ac.id.tugasakhir_android.Common.Common;
 
 public class ViewProfileActivity extends AppCompatActivity {
-
+    StorageReference storage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,14 +46,14 @@ public class ViewProfileActivity extends AppCompatActivity {
 
         final FirebaseDatabase database = FirebaseDatabase.getInstance();
         final DatabaseReference table_user = database.getReference("User");
-        final StorageReference storage = FirebaseStorage.getInstance().getReference().child(Common.currentUser.getPicture());
+        storage = FirebaseStorage.getInstance().getReference().child("User/"+Common.currentUser.getPicture());
 
         tvName.setText(Common.currentUser.getName());
         tvMobileNumber.setText(Common.currentUser.getMobileNumber());
         tvEmail.setText(Common.currentUser.getEmail());
 
         try {
-            final File local = File.createTempFile(Common.currentUser.getPicture(),"jpg");
+            File local = File.createTempFile(Common.currentUser.getPicture(),"jpg");
             storage.getFile(local).addOnSuccessListener(new OnSuccessListener<FileDownloadTask.TaskSnapshot>() {
                 @Override
                 public void onSuccess(FileDownloadTask.TaskSnapshot taskSnapshot) {

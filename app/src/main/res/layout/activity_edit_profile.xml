@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/ivPictureProfile"
+        android:id="@+id/ivPictureEditProfile"
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="32dp"
@@ -119,5 +119,16 @@
         android:textAlignment="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnPictureEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="156dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.796"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/ivPictureEditProfile"
+        app:srcCompat="@drawable/ic_menu_camera" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
