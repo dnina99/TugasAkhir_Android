@@ -16,7 +16,6 @@
         android:supportsRtl="true"
         tools:replace="android:theme"
         android:theme="@style/Theme.TugasAkhir_Android">
-        <uses-library android:name="org.apache.http.legacy" android:required="false" />
 
         <activity android:name=".FoodDetail"></activity>
         <activity android:name=".FoodList" />
