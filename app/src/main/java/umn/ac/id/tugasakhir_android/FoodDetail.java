@@ -3,6 +3,7 @@ package umn.ac.id.tugasakhir_android;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -37,6 +38,8 @@ public class FoodDetail extends AppCompatActivity {
     FirebaseDatabase database;
     DatabaseReference foods;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,6 +52,14 @@ public class FoodDetail extends AppCompatActivity {
         //init view
         numberButton = findViewById(R.id.number_button);
         btnCart = findViewById(R.id.btnCart);
+
+        btnCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(FoodDetail.this, UserCartActivity.class);
+                startActivity(intent);
+            }
+        });
 
         food_name = findViewById(R.id.food_name);
         food_image = findViewById(R.id.img_food);
@@ -64,7 +75,6 @@ public class FoodDetail extends AppCompatActivity {
             foodId = getIntent().getStringExtra("FoodId");
         if (!foodId.isEmpty() && foodId != null)
             getDetailFood(foodId);
-
     }
 
     private void getDetailFood(String foodId) {
@@ -91,6 +101,5 @@ public class FoodDetail extends AppCompatActivity {
 
             }
         });
-
     }
 }
