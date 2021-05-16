@@ -10,8 +10,15 @@ import android.widget.TextView;
 
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firestore.v1.StructuredQuery;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Locale;
 
 import info.hoang8f.widget.FButton;
+import umn.ac.id.tugasakhir_android.ViewHolder.CartAdapter;
 
 public class UserCartActivity extends AppCompatActivity {
     RecyclerView recyclerView;
@@ -22,6 +29,10 @@ public class UserCartActivity extends AppCompatActivity {
 
     TextView txtTotalPrice;
     FButton btnPlace;
+
+    List<StructuredQuery.Order> carts = new ArrayList<>();
+
+    CartAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +52,16 @@ public class UserCartActivity extends AppCompatActivity {
     }
 
     private void loadListFood(){
+        carts = new DatabaseReference(database);
+        adapter = new CartAdapter(carts,this);
+        recyclerView.setAdapter(adapter);
 
+        int total = 0;
+        for(StructuredQuery.Order order:carts)
+            total+=(Integer.parseInt(order.getPrice()))*(Integer.parseInt(order.getQuantity()));
+        Locale locale = new Locale("idn","INDONESIA");
+        NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
+
+        txtTotalPrice.setText(fmt.format(total));
     }
 }

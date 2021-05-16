@@ -42,11 +42,6 @@ class CartViewHolder extends RecyclerView.ViewHolder implements View.OnClickList
     txt_price = (TextView)itemView.findViewById(R.id.cart_item_Price);
     img_cart_count = (ImageView)itemView.findViewById(R.id.cart_item_count);
   }
-
-  @Override
-  public void onClick(View v) {
-
-  }
 }
 
 public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
@@ -74,11 +69,13 @@ public class CartAdapter extends RecyclerView.Adapter<CartViewHolder> {
     Locale locale = new Locale("idn","INDONESIA");
     NumberFormat fmt = NumberFormat.getCurrencyInstance(locale);
     int price = (Integer.parseInt(listData.get(position).getPrice()))*(Integer.
-      parseInt(position).getQuantity());
+      parseInt(listData.get(position).getQuantity()));
+    holder.txt_price.setText(fmt.format(price));
+    holder.txt_cart_name.setText(listData.get(position).getProductName());
   }
 
   @Override
   public int getItemCount() {
-    return 0;
+    return listData.size();
   }
 }
