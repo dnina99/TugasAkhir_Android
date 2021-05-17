@@ -15,6 +15,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -50,6 +51,7 @@ public class EditProfileActivity extends AppCompatActivity {
     public Uri imageUri;
     StorageReference folder;
     DatabaseReference table_user;
+    FirebaseDatabase database;
     String randomKey;
 
     @Override
@@ -64,10 +66,11 @@ public class EditProfileActivity extends AppCompatActivity {
         Button btnCancel = findViewById(R.id.btnCancelEditProfile);
         ImageButton btnCamera = findViewById(R.id.btnPictureEditProfile);
 
-        final FirebaseDatabase database = FirebaseDatabase.getInstance();
+        database = FirebaseDatabase.getInstance();
         table_user = database.getReference("User");
         StorageReference storage = FirebaseStorage.getInstance().getReference().child("User/"+Common.currentUser.getPicture());
         folder = FirebaseStorage.getInstance().getReference();
+        randomKey = Common.currentUser.getPicture();
 
         etName.setText(Common.currentUser.getName());
 
@@ -92,19 +95,28 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final ProgressDialog mDialog = new ProgressDialog(EditProfileActivity.this);
+                //table_user = database.getReference("User");
+                ProgressDialog mDialog = new ProgressDialog(EditProfileActivity.this);
                 mDialog.show();
-                table_user.addValueEventListener(new ValueEventListener() {
+                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         User user = dataSnapshot.child(Common.currentUser.getUsername()).getValue(User.class);
                         if (etPasswrod.getText().toString().equals(etRetype.getText().toString())) {
-                            Toast.makeText(EditProfileActivity.this, "Your Password has been Changed", Toast.LENGTH_SHORT).show();
+
                             table_user.child(Common.currentUser.getUsername()).child("password").setValue(etPasswrod.getText().toString());
                             table_user.child(Common.currentUser.getUsername()).child("name").setValue(etName.getText().toString());
-                            table_user.child(Common.currentUser.getUsername()).child("picture").setValue(randomKey.toString() + ".jpg");
-                            Intent home = new Intent(getApplicationContext(), Home.class);
+
+                            if(randomKey == Common.currentUser.getPicture()){
+                                //randomKey = Common.currentUser.getPicture();
+                                table_user.child(Common.currentUser.getUsername()).child("picture").setValue(randomKey.toString());
+                            }else{
+                                table_user.child(Common.currentUser.getUsername()).child("picture").setValue(randomKey.toString()+".jpg");
+
+                            }
+                            Toast.makeText(EditProfileActivity.this, "Your Password has been Changed", Toast.LENGTH_SHORT).show();
                             Common.currentUser = user;
+                            Intent home = new Intent(getApplicationContext(), Home.class);
                             startActivity(home);
                             finish();
                         } else {
@@ -114,7 +126,7 @@ public class EditProfileActivity extends AppCompatActivity {
 
                     @Override
                     public void onCancelled(@NonNull DatabaseError error) {
-
+                        throw error.toException();
                     }
 
                 });
@@ -165,6 +177,7 @@ public class EditProfileActivity extends AppCompatActivity {
         switch (requestCode){
             case 0 :
                 if(resultCode == Activity.RESULT_OK){
+                    
                     Bundle extras = data.getExtras();
                     Bitmap imageBitmap = (Bitmap) extras.get("data");
                     ivPicture.setImageBitmap(imageBitmap);

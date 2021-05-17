@@ -196,7 +196,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         }else if (id == R.id.nav_log_out) {
 
             // delete remember user and password
-            Paper.book().destroy();
+            //Paper.book().destroy();
 
             Intent mainActivity = new Intent(Home.this, MainActivity.class);
             mainActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
