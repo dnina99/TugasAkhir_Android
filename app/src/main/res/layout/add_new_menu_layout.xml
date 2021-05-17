@@ -37,6 +37,7 @@
             <Button
                 android:id="@+id/btnSelect"
                 android:text="SELECT"
+                android:backgroundTint="@color/teal_700"
                 android:layout_width="0dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
@@ -49,6 +50,7 @@
             <Button
                 android:id="@+id/btnUpload"
                 android:text="UPLOAD"
+                android:backgroundTint="@color/purple_700"
                 android:layout_width="0dp"
                 android:layout_marginRight="8dp"
                 android:layout_marginLeft="8dp"
