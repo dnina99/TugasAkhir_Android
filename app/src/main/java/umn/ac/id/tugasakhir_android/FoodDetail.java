@@ -21,7 +21,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import umn.ac.id.tugasakhir_android.Database.Database;
 import umn.ac.id.tugasakhir_android.Model.Food;
+import umn.ac.id.tugasakhir_android.Model.Order;
 
 public class FoodDetail extends AppCompatActivity {
 
@@ -56,8 +58,16 @@ public class FoodDetail extends AppCompatActivity {
         btnCart.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(FoodDetail.this, UserCartActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(FoodDetail.this, UserCartActivity.class);
+                //startActivity(intent);
+                new Database(getBaseContext()).addToCart(new Order(
+                        foodId,
+                        currentFood.getName(),
+                        numberButton.getNumber(),
+                        currentFood.getPrice(),
+                        currentFood.getDiscount()
+                ));
+                Toast.makeText(FoodDetail.this, "Added to Cart", Toast.LENGTH_SHORT).show();
             }
         });
 
