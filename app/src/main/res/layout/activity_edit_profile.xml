@@ -22,11 +22,13 @@
     <de.hdodenhof.circleimageview.CircleImageView
         android:id="@+id/ivPictureEditProfile"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="0dp"
         android:layout_marginTop="32dp"
+        android:layout_marginBottom="50dp"
         android:src="@drawable/ic_profile"
         app:civ_border_color="@color/white"
         app:civ_fill_color="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/etNameEditProfile"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -46,14 +48,17 @@
 
     <EditText
         android:id="@+id/etNameEditProfile"
-        android:layout_width="330dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="275dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/button"
         android:hint="Namamu"
-        android:textColorHint="@color/white"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -70,15 +75,18 @@
 
     <EditText
         android:id="@+id/etPasswordEditProfile"
-        android:layout_width="330dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="360dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/button"
         android:hint="New Password"
-        android:textColorHint="@color/white"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -95,15 +103,18 @@
 
     <EditText
         android:id="@+id/etRetypeEditProfile"
-        android:layout_width="330dp"
-        android:layout_height="30dp"
-        android:layout_marginLeft="40dp"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="440dp"
+        android:layout_marginEnd="40dp"
         android:background="@drawable/button"
         android:hint="Retype new password"
         android:inputType="textPassword"
         android:textAlignment="center"
+        android:textColor="@color/white"
         android:textColorHint="@color/white"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -113,9 +124,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="40dp"
         android:layout_marginTop="500dp"
-        android:text="Cancel Edit"
         android:backgroundTint="@color/red"
+        android:text="Cancel Edit"
         android:textAlignment="center"
+        app:layout_constraintEnd_toStartOf="@+id/btnSaveEditProfile"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -123,12 +135,13 @@
         android:id="@+id/btnSaveEditProfile"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="220dp"
         android:layout_marginTop="500dp"
+        android:layout_marginEnd="40dp"
+        android:backgroundTint="@color/teal_700"
         android:text="Save Changes"
         android:textAlignment="center"
-        android:backgroundTint="@color/teal_700"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnCancelEditProfile"
         app:layout_constraintTop_toTopOf="parent" />
 
     <ImageButton
