@@ -1,6 +1,7 @@
 package umn.ac.id.tugasakhir_android;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -35,9 +36,14 @@ public class ViewProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_profile);
 
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Profile");
-        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        actionBar.setTitle("Profile");
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
         TextView tvName = findViewById(R.id.tvNameProfile);
         TextView tvMobileNumber = findViewById(R.id.tvMobileNumberProfile);
@@ -81,13 +87,15 @@ public class ViewProfileActivity extends AppCompatActivity {
     //Action Dari Option List
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
-            case R.id.profilein:
+        if(item.getItemId() == R.id.profilein){
                 Intent intent = new Intent(getApplicationContext(), EditProfileActivity.class);
                 startActivity(intent);
                 return true;
-            default:
-                return super.onOptionsItemSelected(item);
         }
+        if(item.getItemId() == android.R.id.home) {
+                this.finish();
+                return true;
+        }
+                return super.onOptionsItemSelected(item);
     }
 }

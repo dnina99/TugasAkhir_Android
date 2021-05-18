@@ -1,6 +1,8 @@
 package umn.ac.id.tugasakhir_android;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -57,7 +59,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         setContentView(R.layout.activity_home);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //toolbar.setTitle("Menu");
+        toolbar.setTitle("List Category");
+        toolbar.setBackground(new ColorDrawable(Color.parseColor("#000000")));
         setSupportActionBar(toolbar);
 
         //Init Firebase yang digunakan
@@ -157,7 +160,7 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.home, menu);
+        //getMenuInflater().inflate(R.menu.home, menu);
         return true;
     }
 
