@@ -52,25 +52,8 @@ public class OrderStatus extends AppCompatActivity {
 
     private void loadOrders(String mobileNumber) {
 
-        Query query = FirebaseDatabase.getInstance()
-                .getReference()
-                .child("Requests");
-
         FirebaseRecyclerOptions<Request> options =
-                new FirebaseRecyclerOptions.Builder<Request>()
-                        .setQuery(query, new SnapshotParser<Request>() {
-                            @NonNull
-                            @Override
-                            public Request parseSnapshot(@NonNull DataSnapshot snapshot) {
-                                return new Request(snapshot.child("mobileNumber").getValue().toString(),
-                                        snapshot.child("name").getValue().toString(),
-                                        snapshot.child("address").getValue().toString(),
-                                        snapshot.child("total").getValue().toString(),
-                                        snapshot.child("foods").getValue(Request.class); //untuk ambil data list masih belum ketemu prompt (?) nya :">
-                                        );
-                            }
-                        })
-                        .build();
+                new FirebaseRecyclerOptions.Builder<Request>().setQuery(requests.orderByChild("mobileNumber").equalTo(mobileNumber), Request.class).build();
 
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(options) {
             @Override

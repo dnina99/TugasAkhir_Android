@@ -178,8 +178,8 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
         int id = item.getItemId();
 
         if (id == R.id.nav_menu) {
-            Intent menuIntent = new Intent(Home.this, Home.class);
-            startActivity(menuIntent);
+            //Intent menuIntent = new Intent(Home.this, Home.class);
+            //startActivity(menuIntent);
 
         } else if (id == R.id.nav_cart) {
             //Intent cartIntent = new Intent(Home.this, Cart.class);
