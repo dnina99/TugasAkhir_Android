@@ -302,8 +302,6 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
         //if (item.getItemId() == R.id.nav_refresh) {
         //loadMenu();
         //}
-
-
         // return super.onOptionsItemSelected(item);
         return false;
     }

@@ -91,11 +91,13 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal">
 
-                        <ImageView
+                        <TextView
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
-                            android:src="@drawable/ic_baseline_attach_money_24" />
+                            android:textColor="@color/colorPrimary"
+                            android:textSize="20sp"
+                            android:text="Rp." />
 
                         <TextView
                             android:id="@+id/food_price"
