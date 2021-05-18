@@ -20,11 +20,15 @@ public class Request {
         this.address = address;
         this.total = total;
         this.foods = foods;
-        this.status = "0"; //default is 0, 0 : placed, 1 : shipping, 2 : shiped
+        this.status = "0"; //default is 0, 0 : placed, 1 : shipping, 2 : shipped
     }
 
     public String getStatus() {
         return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public String getMobileNumber() {
