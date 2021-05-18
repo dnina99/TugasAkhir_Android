@@ -182,12 +182,12 @@ public class Home extends AppCompatActivity implements NavigationView.OnNavigati
             //startActivity(menuIntent);
 
         } else if (id == R.id.nav_cart) {
-            //Intent cartIntent = new Intent(Home.this, Cart.class);
-            //startActivity(cartIntent);
+            Intent cartIntent = new Intent(getApplicationContext(), UserCartActivity.class);
+            startActivity(cartIntent);
 
         } else if (id == R.id.nav_orders) {
-            //Intent orderIntent = new Intent(Home.this, OrderStatus.class);
-            //startActivity(orderIntent);
+            Intent orderIntent = new Intent(getApplicationContext(), OrderStatus.class);
+            startActivity(orderIntent);
 
         }else if (id == R.id.nav_profile){
             Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
