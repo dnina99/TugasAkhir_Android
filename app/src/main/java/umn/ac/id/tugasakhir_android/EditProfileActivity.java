@@ -125,7 +125,6 @@ public class EditProfileActivity extends AppCompatActivity {
                                 table_user.child(Common.currentUser.getUsername()).child("picture").setValue(randomKey.toString());
                             }else{
                                 table_user.child(Common.currentUser.getUsername()).child("picture").setValue(randomKey.toString()+".jpg");
-
                             }
                             Toast.makeText(EditProfileActivity.this, "Your Password has been Changed", Toast.LENGTH_SHORT).show();
                             Common.currentUser = user;
