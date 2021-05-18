@@ -66,16 +66,42 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String primaryKey = etUsername.getText().toString();
+                String name = etFullName.getText().toString();
+                String email = etEmail.getText().toString();
+                String number = etMobileNumber.getText().toString();
+                String password = etPassword.getText().toString();
+
+                if (name.isEmpty()) {
+                    etFullName.setError("Name is Required");
+                    etFullName.requestFocus();
+                    return;
+                }
+                if (email.isEmpty()) {
+                    etEmail.setError("Email is Required");
+                    etEmail.requestFocus();
+                    return;
+                }
+                if (number.isEmpty()) {
+                    etMobileNumber.setError("Mobile Number is Required");
+                    etMobileNumber.requestFocus();
+                    return;
+                }
                 if (primaryKey.isEmpty()) {
                     etUsername.setError("Username is Required");
                     etUsername.requestFocus();
                     return;
                 }
+                if (password.isEmpty() || password.length() <= 6) {
+                    etPassword.setError("Password is Required and need more than 6 letters");
+                    etPassword.requestFocus();
+                    return;
+                }
+
 
                 final ProgressDialog mDialog = new ProgressDialog(RegisterActivity.this);
                 mDialog.show();
 
-                table_user.addValueEventListener(new ValueEventListener() {
+                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // check if user already exits  through phone number

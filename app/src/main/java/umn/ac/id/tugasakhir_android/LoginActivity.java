@@ -44,7 +44,7 @@ public class LoginActivity extends AppCompatActivity {
                 final ProgressDialog mDialog = new ProgressDialog(LoginActivity.this);
                 mDialog.show();
 
-                table_user.addValueEventListener(new ValueEventListener() {
+                table_user.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                         // check if user already exits  through phone number
