@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.ViewGroup;
 
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
@@ -23,6 +25,7 @@ import com.google.firebase.database.Query;
 import java.util.List;
 
 import umn.ac.id.tugasakhir_android.Common.Common;
+import umn.ac.id.tugasakhir_android.Interface.ItemClickListener;
 import umn.ac.id.tugasakhir_android.Model.Order;
 import umn.ac.id.tugasakhir_android.Model.Request;
 import umn.ac.id.tugasakhir_android.ViewHolder.OrderViewHolder;
@@ -70,38 +73,29 @@ public class OrderStatus extends AppCompatActivity {
 
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull OrderViewHolder viewHolder, int i, @NonNull Request request) {
-                viewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
-                viewHolder.txtOrderStatus.setText(convertCodeToStatus(request.getStatus()));
-                viewHolder.txtOrderAddress.setText(request.getAddress());
-                viewHolder.txtOrderPhone.setText(request.getMobileNumber());
+            protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int i, @NonNull Request request) {
+                orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
+                orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
+                orderViewHolder.txtOrderAddress.setText(request.getAddress());
+                orderViewHolder.txtOrderPhone.setText(request.getMobileNumber());
+                orderViewHolder.setItemClickListener(new ItemClickListener() {
+                    @Override
+                    public void onClick(View view, int position, boolean isLongClik) {
+
+                    }
+                });
+
             }
 
             @NonNull
             @Override
             public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-                return null;
+                View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_layout, parent, false);
+                return new OrderViewHolder(view);
             }
         };
+        adapter.startListening();
+        adapter.notifyDataSetChanged();
         recyclerView.setAdapter(adapter);
     }
-
-    private String convertCodeToStatus(String status) {
-        if(status.equals("0"))
-            return "Placed";
-        else if(status.equals("1"))
-            return "On my way";
-        else
-            return "Shipped";
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item){
-        if(item.getItemId() == android.R.id.home) {
-            this.finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
-    }
-
 }
