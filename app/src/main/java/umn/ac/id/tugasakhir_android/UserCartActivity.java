@@ -118,6 +118,8 @@ public class UserCartActivity extends AppCompatActivity {
                 new Database(getBaseContext()).cleanCart();
                 Toast.makeText(UserCartActivity.this, "Thank You! Order Place", Toast.LENGTH_SHORT).show();
                 finish();
+                Intent keorder = new Intent(getApplicationContext(), OrderStatus.class);
+                startActivity(keorder);
             }
         });
         alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
