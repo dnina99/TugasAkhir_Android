@@ -83,9 +83,13 @@ public class EditProfileActivity extends AppCompatActivity {
         table_user = database.getReference("User");
         StorageReference storage = FirebaseStorage.getInstance().getReference().child("User/"+Common.currentUser.getPicture());
         folder = FirebaseStorage.getInstance().getReference();
+
         randomKey = Common.currentUser.getPicture();
 
         etName.setText(Common.currentUser.getName());
+        etPasswrod.setText(Common.currentUser.getPassword());
+        etRetype.setText(Common.currentUser.getPassword());
+
 
         try {
             File local = File.createTempFile(Common.currentUser.getPicture(),"jpg");
@@ -108,7 +112,24 @@ public class EditProfileActivity extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //table_user = database.getReference("User");
+
+                if (etName.getText().toString().isEmpty()) {
+                    etName.setError("Name is Required");
+                    etName.requestFocus();
+                    return;
+                }
+
+                if (etPasswrod.getText().toString().isEmpty() || etPasswrod.length() <= 6) {
+                    etPasswrod.setError("Password is Required and need more than 6 letters");
+                    etPasswrod.requestFocus();
+                    return;
+                }
+                if (etRetype.getText().toString().isEmpty()) {
+                    etRetype.setError("Re-type password is Required");
+                    etRetype.requestFocus();
+                    return;
+                }
+
                 ProgressDialog mDialog = new ProgressDialog(EditProfileActivity.this);
                 mDialog.show();
                 table_user.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -126,13 +147,15 @@ public class EditProfileActivity extends AppCompatActivity {
                             }else{
                                 table_user.child(Common.currentUser.getUsername()).child("picture").setValue(randomKey.toString()+".jpg");
                             }
-                            Toast.makeText(EditProfileActivity.this, "Your Password has been Changed", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(EditProfileActivity.this, "Changes has been saved", Toast.LENGTH_SHORT).show();
                             Common.currentUser = user;
                             Intent home = new Intent(getApplicationContext(), Home.class);
                             startActivity(home);
                             finish();
                         } else {
                             Toast.makeText(EditProfileActivity.this, "Password not Match", Toast.LENGTH_SHORT).show();
+                            mDialog.dismiss();
+                            //return;
                         }
                     }
 
