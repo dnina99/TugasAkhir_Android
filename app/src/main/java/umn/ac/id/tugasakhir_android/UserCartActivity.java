@@ -90,7 +90,7 @@ public class UserCartActivity extends AppCompatActivity {
     private void showAlertDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(UserCartActivity.this);
         alertDialog.setTitle("One more Step!");
-        alertDialog.setMessage("Enter your Address: ");
+        alertDialog.setMessage("Catatan Tambahan: ");
         final EditText edtAddress = new EditText(UserCartActivity.this);
         LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
                 LinearLayout.LayoutParams.MATCH_PARENT,

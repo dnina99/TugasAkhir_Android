@@ -68,16 +68,25 @@ public class OrderStatus extends AppCompatActivity {
 
     private void loadOrders(String mobileNumber) {
 
+
         FirebaseRecyclerOptions<Request> options =
                 new FirebaseRecyclerOptions.Builder<Request>().setQuery(requests.orderByChild("mobileNumber").equalTo(mobileNumber), Request.class).build();
 
         adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(options) {
             @Override
             protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int i, @NonNull Request request) {
-                orderViewHolder.txtOrderId.setText(request.getFoods().get(0).getQuantity() + " x " + request.getFoods().get(0).getProductName());
-                orderViewHolder.txtOrderStatus.setText(Common.convertCodeToStatus(request.getStatus()));
-                orderViewHolder.txtOrderAddress.setText(request.getAddress());
-                orderViewHolder.txtOrderPhone.setText(request.getMobileNumber());
+                //String builder supaya menampung semua makanan
+                StringBuilder allfoodb = new StringBuilder();
+                for(int x = 0; x < request.getFoods().size(); x++){
+                    allfoodb.append(request.getFoods().get(x).getQuantity() + " x " + request.getFoods().get(x).getProductName() + "\n");
+                }
+                //Convert semua jadi string
+                String allfood = allfoodb.toString();
+                orderViewHolder.txtOrderList.setText(allfood);
+                orderViewHolder.txtOrderStatus.setText ("Status  : "+ Common.convertCodeToStatus(request.getStatus()));
+                orderViewHolder.txtOrderAddress.setText("Catatan : "+request.getAddress());
+                orderViewHolder.txtOrderPhone.setText  ("Total   : "+request.getTotal());
+
                 orderViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClik) {

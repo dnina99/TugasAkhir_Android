@@ -5,6 +5,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="8dp"
     android:elevation="4dp"
+    android:backgroundTint="@color/black"
     android:orientation="vertical">
 
     <LinearLayout
@@ -22,14 +23,16 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/order_id"
+                android:id="@+id/list_makanan"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
                 android:text="#111111"
-                android:textAllCaps="true"
-                android:textStyle="bold" />
+                android:textColor="@color/teal_200"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textAllCaps="true" />
 
             <TextView
                 android:id="@+id/order_status"
@@ -38,6 +41,8 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
                 android:text="Status"
+                android:textColor= "@color/teal_200"
+                android:textSize="20dp"
                 android:textAllCaps="true"
                 android:textStyle="italic" />
 
@@ -48,6 +53,8 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
                 android:text="9874563255"
+                android:textColor= "@color/teal_200"
+                android:textSize="20dp"
                 android:textAllCaps="true"
                 android:textStyle="italic" />
 
@@ -58,6 +65,8 @@
                 android:layout_marginLeft="10dp"
                 android:gravity="center_vertical|start"
                 android:text="Address"
+                android:textColor= "@color/teal_200"
+                android:textSize="20dp"
                 android:textAllCaps="true"
                 android:textStyle="italic" />
 
