@@ -317,23 +317,14 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
             Intent menuIntent = new Intent(RestoHomeActivity.this, RestoHomeActivity.class);
             startActivity(menuIntent);
 
-        } else if (id == R.id.nav_cart) {
-            //Intent cartIntent = new Intent(Home.this, Cart.class);
-            //startActivity(cartIntent);
-
         } else if (id == R.id.nav_orders) {
             //Intent orderIntent = new Intent(Home.this, OrderStatus.class);
             //startActivity(orderIntent);
 
-        }else if (id == R.id.nav_profile){
-            Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
-            //Common.currentUser = user;
-            startActivity(profile);
         }else if (id == R.id.nav_log_out) {
 
             // delete remember user and password
             Paper.book().destroy();
-
             Intent mainActivity = new Intent(RestoHomeActivity.this, MainActivity.class);
             mainActivity.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(mainActivity);
