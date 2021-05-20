@@ -11,12 +11,13 @@ import umn.ac.id.tugasakhir_android.R;
 
 public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
-    public TextView txtOrderList, txtOrderStatus, txtOrderPhone, txtOrderAddress;
+    public TextView txtOrderList, txtOrderStatus, txtOrderPhone, txtOrderAddress, txtOrderName, txtOrderId;
     private ItemClickListener itemClickListener;
 
     public OrderViewHolder(@NonNull View itemView) {
         super(itemView);
-
+        txtOrderId = (TextView) itemView.findViewById(R.id.orderID);
+        txtOrderName = (TextView) itemView.findViewById(R.id.namaPemesan);
         txtOrderList = (TextView) itemView.findViewById(R.id.list_makanan);
         txtOrderStatus = (TextView) itemView.findViewById(R.id.order_status);
         txtOrderPhone = (TextView) itemView.findViewById(R.id.order_phone);
