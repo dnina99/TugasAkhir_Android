@@ -10,12 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import umn.ac.id.tugasakhir_android.Interface.ItemClickListener;
 import umn.ac.id.tugasakhir_android.R;
 
-public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
+public class RestoOrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
 
     public TextView txtOrderList, txtOrderStatus, txtOrderPhone, txtOrderAddress, txtOrderName, txtOrderId;
     private ItemClickListener itemClickListener;
 
-    public OrderViewHolder(@NonNull View itemView) {
+    public RestoOrderViewHolder(@NonNull View itemView) {
         super(itemView);
         txtOrderId = (TextView) itemView.findViewById(R.id.orderID);
         txtOrderName = (TextView) itemView.findViewById(R.id.namaPemesan);
@@ -25,7 +25,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtOrderAddress = (TextView) itemView.findViewById(R.id.order_address);
 
         itemView.setOnClickListener(this);
-        //itemView.setOnCreateContextMenuListener(this);
+        itemView.setOnCreateContextMenuListener(this);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {

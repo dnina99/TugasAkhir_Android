@@ -30,13 +30,14 @@ import umn.ac.id.tugasakhir_android.Database.Database;
 import umn.ac.id.tugasakhir_android.Interface.ItemClickListener;
 import umn.ac.id.tugasakhir_android.ViewHolder.OrderViewHolder;
 import umn.ac.id.tugasakhir_android.Model.Request;
+import umn.ac.id.tugasakhir_android.ViewHolder.RestoOrderViewHolder;
 
 public class RestoOrderListActivity extends AppCompatActivity {
 
     public RecyclerView recyclerView;
     public RecyclerView.LayoutManager layoutManager;
 
-    FirebaseRecyclerAdapter<Request, OrderViewHolder> adapter;
+    FirebaseRecyclerAdapter<Request, RestoOrderViewHolder> adapter;
 
     FirebaseDatabase database;
     DatabaseReference requests;
@@ -74,31 +75,31 @@ public class RestoOrderListActivity extends AppCompatActivity {
         FirebaseRecyclerOptions<Request> options =
                 new FirebaseRecyclerOptions.Builder<Request>().setQuery(requests, Request.class).build();
 
-        adapter = new FirebaseRecyclerAdapter<Request, OrderViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Request, RestoOrderViewHolder>(options) {
 
             @NonNull
             @Override
-            public OrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public RestoOrderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.order_layout_resto, parent, false);
-                return new OrderViewHolder(view);
+                return new RestoOrderViewHolder(view);
             }
 
             @Override
-            protected void onBindViewHolder(@NonNull OrderViewHolder orderViewHolder, int i, @NonNull Request request) {
+            protected void onBindViewHolder(@NonNull RestoOrderViewHolder restoOrderViewHolder, int i, @NonNull Request request) {
                 StringBuilder allfoodb = new StringBuilder();
                 for(int x = 0; x < request.getFoods().size(); x++){
                     allfoodb.append(request.getFoods().get(x).getQuantity() + " x " + request.getFoods().get(x).getProductName() + "\n");
                 }
                 //Convert semua jadi string
                 String allfood = allfoodb.toString();
-                orderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
-                orderViewHolder.txtOrderName.setText(request.getName());
-                orderViewHolder.txtOrderList.setText(allfood);
-                orderViewHolder.txtOrderStatus.setText ("Status  : "+ Common.convertCodeToStatus(request.getStatus()));
-                orderViewHolder.txtOrderAddress.setText("Catatan : "+request.getAddress());
-                orderViewHolder.txtOrderPhone.setText  ("Total   : "+request.getTotal());
+                restoOrderViewHolder.txtOrderId.setText(adapter.getRef(i).getKey());
+                restoOrderViewHolder.txtOrderName.setText(request.getName());
+                restoOrderViewHolder.txtOrderList.setText(allfood);
+                restoOrderViewHolder.txtOrderStatus.setText ("Status  : "+ Common.convertCodeToStatus(request.getStatus()));
+                restoOrderViewHolder.txtOrderAddress.setText("Catatan : "+request.getAddress());
+                restoOrderViewHolder.txtOrderPhone.setText  ("Total   : "+request.getTotal());
 
-                orderViewHolder.setItemClickListener(new ItemClickListener() {
+                restoOrderViewHolder.setItemClickListener(new ItemClickListener() {
                     @Override
                     public void onClick(View view, int position, boolean isLongClik) {
 
