@@ -321,14 +321,6 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
             Intent orderIntent = new Intent(RestoHomeActivity.this, RestoOrderListActivity.class);
             startActivity(orderIntent);
 
-<<<<<<< Updated upstream
-=======
-        }else if (id == R.id.nav_profile){
-            //Intent profile = new Intent(getApplicationContext(), ViewProfileActivity.class);
-            //Common.currentUser = user;
-            //startActivity(profile);
-
->>>>>>> Stashed changes
         }else if (id == R.id.nav_log_out) {
 
             // delete remember user and password
