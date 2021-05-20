@@ -1,5 +1,6 @@
 package umn.ac.id.tugasakhir_android.ViewHolder;
 
+import android.view.ContextMenu;
 import android.view.View;
 import android.widget.TextView;
 
@@ -9,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import umn.ac.id.tugasakhir_android.Interface.ItemClickListener;
 import umn.ac.id.tugasakhir_android.R;
 
-public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
 
     public TextView txtOrderList, txtOrderStatus, txtOrderPhone, txtOrderAddress, txtOrderName, txtOrderId;
     private ItemClickListener itemClickListener;
@@ -24,7 +25,7 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
         txtOrderAddress = (TextView) itemView.findViewById(R.id.order_address);
 
         itemView.setOnClickListener(this);
-
+        itemView.setOnCreateContextMenuListener(this);
     }
 
     public void setItemClickListener(ItemClickListener itemClickListener) {
@@ -34,5 +35,13 @@ public class OrderViewHolder extends RecyclerView.ViewHolder implements View.OnC
     @Override
     public void onClick(View v) {
         itemClickListener.onClick(v, getAdapterPosition(), false);
+    }
+
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, ContextMenu.ContextMenuInfo menuInfo) {
+        menu.setHeaderTitle("PILIH AKSI");
+
+        menu.add(0,0, getAdapterPosition(), "Update");
+        menu.add(0,1, getAdapterPosition(), "Delete");
     }
 }
