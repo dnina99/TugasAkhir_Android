@@ -52,6 +52,7 @@ import umn.ac.id.tugasakhir_android.Common.Common;
 import umn.ac.id.tugasakhir_android.Interface.ItemClickListener;
 import umn.ac.id.tugasakhir_android.Model.Category;
 import umn.ac.id.tugasakhir_android.ViewHolder.MenuViewHolder;
+import umn.ac.id.tugasakhir_android.ViewHolder.RestoMenuViewHolder;
 
 public class RestoHomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener{
 
@@ -66,7 +67,7 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
 
     RecyclerView recycler_menu;
     RecyclerView.LayoutManager layoutManager;
-    FirebaseRecyclerAdapter<Category, MenuViewHolder> adapter;
+    FirebaseRecyclerAdapter<Category, RestoMenuViewHolder> adapter;
 
     Category newCategory;
     DrawerLayout drawer;
@@ -80,9 +81,8 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resto_home);
-
         Toolbar toolbar = findViewById(R.id.toolbar);
-        //toolbar.setTitle("Menu");
+        toolbar.setTitle("List Category");
         setSupportActionBar(toolbar);
 
         //Init Firebase yang digunakan
@@ -98,12 +98,14 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
                 showDialog();
             }
         });
+
         drawer = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
+
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
         //Set nama user yang login
@@ -128,9 +130,9 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
                         .setQuery(category, umn.ac.id.tugasakhir_android.Model.Category.class)
                         .build();
 
-        adapter = new FirebaseRecyclerAdapter<umn.ac.id.tugasakhir_android.Model.Category, MenuViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<umn.ac.id.tugasakhir_android.Model.Category, RestoMenuViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull final MenuViewHolder menuViewHolder, int i,
+            protected void onBindViewHolder(@NonNull final RestoMenuViewHolder menuViewHolder, int i,
                                             @NonNull final umn.ac.id.tugasakhir_android.Model.Category category) {
 
 
@@ -153,16 +155,15 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
 
             @NonNull
             @Override
-            public MenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public RestoMenuViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.menu_item, parent, false);
-                return new MenuViewHolder(view);
+                return new RestoMenuViewHolder(view);
             }
         };
         adapter.startListening();
         adapter.notifyDataSetChanged();
         recycler_menu.setAdapter(adapter);
     }
-
 
     @Override
     public void onBackPressed() {
@@ -180,6 +181,7 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
 
     }
 
+    //Add Category
     private void showDialog(){
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(RestoHomeActivity.this);
         alertDialog.setTitle("Tambah Category Baru");
@@ -340,5 +342,115 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
         DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+
+    //Update and Delete
+    @Override
+    public boolean onContextItemSelected(@NonNull MenuItem item) {
+        if (item.getTitle().equals(Common.UPDATE)){
+            showUpdateDialog(adapter.getRef(item.getOrder()).getKey(), adapter.getItem(item.getOrder()));
+        } else if (item.getTitle().equals(Common.DELETE)){
+            deleteCategory(adapter.getRef(item.getOrder()).getKey());
+        }
+        return super.onContextItemSelected(item);
+    }
+
+    private void deleteCategory(String key) {
+        category.child(key).removeValue();
+        Toast.makeText(this, "Item di Hapus !!!", Toast.LENGTH_SHORT);
+    }
+
+    private void showUpdateDialog(final String key, final Category item) {
+        // Salin saja kodenya dari showDialog() lalu dirubah di beberapa bagian
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(RestoHomeActivity.this);
+        alertDialog.setTitle("Update Katgori");
+        alertDialog.setMessage("Mohon isi semua Informasi!");
+
+        LayoutInflater inflater = this.getLayoutInflater();
+        View add_menu_layout = inflater.inflate(R.layout.add_new_menu_layout, null);
+
+        edtNama = add_menu_layout.findViewById(R.id.edtNama);
+        btnSelect = add_menu_layout.findViewById(R.id.btnSelect);
+        btnUpload = add_menu_layout.findViewById(R.id.btnUpload);
+
+        // Atur nama default
+        edtNama.setText(item.getName());
+
+        //Event for Button
+        btnSelect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                chooseImage(); //Mengijinkan pengguna untuk memilih gambar dari galery dan menyimpan url dari gambar tersebut
+            }
+        });
+
+        btnUpload.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                changeImage(item);
+            }
+        });
+
+        alertDialog.setView(add_menu_layout);
+        alertDialog.setIcon(R.drawable.ic_baseline_shopping_cart_24);
+
+        //Set button
+        alertDialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+                // Update informasi Kategori
+                item.setName(edtNama.getText().toString());
+                category.child(key).setValue(item);
+            }
+        });
+        alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int i) {
+                dialog.dismiss();
+            }
+        });
+        alertDialog.show();
+    }
+
+    private void changeImage(final Category item) {
+        if (saveUri != null) {
+            final ProgressDialog mDialog = new ProgressDialog(this);
+            mDialog.setMessage("Mengupload...");
+            mDialog.show();
+
+            String imageName = UUID.randomUUID().toString();
+            final StorageReference imageFolder = storageReference.child("images/"+imageName);
+            imageFolder.putFile(saveUri)
+                    .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            mDialog.dismiss();
+                            Toast.makeText(RestoHomeActivity.this, "Terupload!!!", Toast.LENGTH_SHORT).show();
+                            imageFolder.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                                @Override
+                                public void onSuccess(Uri uri) {
+                                    // atur nilai untuk newCategory jika gambar upload dan kita ambil download linknya.
+                                    item.setImage(uri.toString());
+                                }
+                            });
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            mDialog.dismiss();
+                            Toast.makeText(RestoHomeActivity.this, ""+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnProgressListener(new OnProgressListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onProgress(UploadTask.TaskSnapshot taskSnapshot) {
+                            double progress = (100.0 * taskSnapshot.getBytesTransferred() / taskSnapshot.getTotalByteCount());
+                            mDialog.setMessage("Terupload "+progress+" %");
+                        }
+                    });
+        }
     }
 }
