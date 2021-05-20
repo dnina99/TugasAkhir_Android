@@ -70,7 +70,7 @@ public class FoodList extends AppCompatActivity {
 
     private void loadListFood(String categoryId){
         FirebaseRecyclerOptions<Food> options =
-                new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("MenuId").equalTo(categoryId), Food.class).build();
+                new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("menuId").equalTo(categoryId), Food.class).build();
 
         adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
             @Override
