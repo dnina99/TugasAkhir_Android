@@ -1,6 +1,7 @@
 package umn.ac.id.tugasakhir_android;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -9,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +45,7 @@ import umn.ac.id.tugasakhir_android.Common.Common;
 import umn.ac.id.tugasakhir_android.Interface.ItemClickListener;
 import umn.ac.id.tugasakhir_android.Model.Food;
 import umn.ac.id.tugasakhir_android.ViewHolder.FoodViewHolder;
+import umn.ac.id.tugasakhir_android.ViewHolder.RestoFoodViewHolder;
 
 public class RestoFoodList extends AppCompatActivity {
 
@@ -59,7 +63,7 @@ public class RestoFoodList extends AppCompatActivity {
 
     String categoryId="";
 
-    FirebaseRecyclerAdapter<Food, FoodViewHolder> adapter;
+    FirebaseRecyclerAdapter<Food, RestoFoodViewHolder> adapter;
 
     // Add new food
     MaterialEditText edtNama, edtDescription, edtPrice, edtDiscount;
@@ -73,6 +77,15 @@ public class RestoFoodList extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_resto_food_list);
+
+        // calling the action bar
+        ActionBar actionBar = getSupportActionBar();
+
+        // showing the back button in action bar
+        actionBar.setDisplayHomeAsUpEnabled(true);
+
+        actionBar.setTitle("List Food");
+        actionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor("#000000")));
 
         db = FirebaseDatabase.getInstance();
         foodList = db.getReference("Food");
@@ -215,9 +228,9 @@ public class RestoFoodList extends AppCompatActivity {
         FirebaseRecyclerOptions<Food> options =
                 new FirebaseRecyclerOptions.Builder<Food>().setQuery(foodList.orderByChild("menuId").equalTo(categoryId), Food.class).build();
 
-        adapter = new FirebaseRecyclerAdapter<Food, FoodViewHolder>(options) {
+        adapter = new FirebaseRecyclerAdapter<Food, RestoFoodViewHolder>(options) {
             @Override
-            protected void onBindViewHolder(@NonNull FoodViewHolder foodViewHolder, int i, @NonNull final Food food) {
+            protected void onBindViewHolder(@NonNull RestoFoodViewHolder foodViewHolder, int i, @NonNull final Food food) {
                 foodViewHolder.food_name.setText(food.getName());
                 Picasso.get().load(food.getImage()).into(foodViewHolder.food_image);
 
@@ -238,9 +251,9 @@ public class RestoFoodList extends AppCompatActivity {
 
             @NonNull
             @Override
-            public FoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+            public RestoFoodViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.food_item, parent, false);
-                return new FoodViewHolder(view);
+                return new RestoFoodViewHolder(view);
             }
 
             @Override
@@ -388,5 +401,14 @@ public class RestoFoodList extends AppCompatActivity {
                         }
                     });
         }
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        if(item.getItemId() == android.R.id.home) {
+            this.finish();
+            return true;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

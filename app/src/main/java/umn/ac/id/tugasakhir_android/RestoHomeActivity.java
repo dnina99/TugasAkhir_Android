@@ -3,6 +3,8 @@ package umn.ac.id.tugasakhir_android;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -83,7 +85,10 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
         setContentView(R.layout.activity_resto_home);
         Toolbar toolbar = findViewById(R.id.toolbar);
         toolbar.setTitle("List Category");
+        toolbar.setBackground(new ColorDrawable(Color.parseColor("#000000")));
         setSupportActionBar(toolbar);
+
+
 
         //Init Firebase yang digunakan
         database = FirebaseDatabase.getInstance();

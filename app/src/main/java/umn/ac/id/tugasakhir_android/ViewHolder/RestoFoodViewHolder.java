@@ -12,7 +12,7 @@ import umn.ac.id.tugasakhir_android.Common.Common;
 import umn.ac.id.tugasakhir_android.Interface.ItemClickListener;
 import umn.ac.id.tugasakhir_android.R;
 
-public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+public class RestoFoodViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnCreateContextMenuListener {
 
 
     public TextView food_name;
@@ -24,7 +24,7 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         this.itemClickListener = itemClickListener;
     }
 
-    public FoodViewHolder(@NonNull View itemView) {
+    public RestoFoodViewHolder(@NonNull View itemView) {
         super(itemView);
 
 
@@ -34,6 +34,8 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
 
 
         itemView.setOnClickListener(this);
+        itemView.setOnCreateContextMenuListener(this);
+
 
     }
 
@@ -42,4 +44,11 @@ public class FoodViewHolder extends RecyclerView.ViewHolder implements View.OnCl
         itemClickListener.onClick(v, getAdapterPosition(), false);
     }
 
+    @Override
+    public void onCreateContextMenu(ContextMenu contextMenu, View view, ContextMenu.ContextMenuInfo contextMenuInfo) {
+        contextMenu.setHeaderTitle("Pilih Aksi");
+
+        contextMenu.add(0,0,getAdapterPosition(), Common.UPDATE);
+        contextMenu.add(0,1,getAdapterPosition(), Common.DELETE);
+    }
 }
