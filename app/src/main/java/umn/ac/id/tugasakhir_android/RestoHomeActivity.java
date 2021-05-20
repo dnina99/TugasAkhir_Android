@@ -144,7 +144,7 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         // Masukkan kategori id ke food list class
-                        Intent foodIntent = new Intent(RestoHomeActivity.this, FoodList.class);
+                        Intent foodIntent = new Intent(RestoHomeActivity.this, RestoFoodList.class);
                         // Asumsi kategori key ini adalah foreign key sebagai reference saja
                         foodIntent.putExtra("CategoryId", adapter.getRef(position).getKey());
                         startActivity(foodIntent);
