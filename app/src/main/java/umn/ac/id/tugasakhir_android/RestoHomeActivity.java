@@ -222,13 +222,20 @@ public class RestoHomeActivity extends AppCompatActivity implements NavigationVi
                     category.push().setValue(newCategory);
                     Snackbar.make(drawer, "Kategori baru "+ newCategory.getName()+"Telah ditambahkan", Snackbar.LENGTH_SHORT)
                             .show();
+                    saveUri = null;
+                    newCategory = null;
                     //Toast.makeText(RestoHomeActivity.this, "Kategori baru "+ newCategory.getName()+"Telah ditambahkan", Toast.LENGTH_SHORT).show();
+                }else {
+                    Snackbar.make(drawer, "Data yang dimasukkan belum lengkap", Snackbar.LENGTH_SHORT)
+                            .show();
                 }
             }
         });
         alertDialog.setNegativeButton("NO", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int i) {
+                saveUri = null;
+                newCategory = null;
                 dialog.dismiss();
             }
         });
