@@ -241,7 +241,7 @@ public class RestoFoodList extends AppCompatActivity {
                     @Override
                     public void onClick(View view, int position, boolean isLongClick) {
                         // Pindah activity
-                        Intent foodDetails = new Intent(RestoFoodList.this, FoodDetail.class);
+                        Intent foodDetails = new Intent(RestoFoodList.this, RestoFoodDetail.class);
                         foodDetails.putExtra("FoodId", adapter.getRef(position).getKey());
                         startActivity(foodDetails);
                     }
