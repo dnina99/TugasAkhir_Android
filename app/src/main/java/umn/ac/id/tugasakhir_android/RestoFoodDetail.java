@@ -49,7 +49,7 @@ public class RestoFoodDetail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_food_detail);
+        setContentView(R.layout.activity_resto_food_detail);
 
         // calling the action bar
         ActionBar actionBar = getSupportActionBar();
