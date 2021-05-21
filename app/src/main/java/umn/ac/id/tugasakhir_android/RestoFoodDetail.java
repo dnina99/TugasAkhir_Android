@@ -91,13 +91,15 @@ public class RestoFoodDetail extends AppCompatActivity {
 
                 Log.d("TAG", "FoodID " +foodId);
                 // setting the image from firebase into appbar;
-                Picasso.get().load(currentFood.getImage()).into(food_image);
-                //set title in appbar
-                collapsingToolbarLayout.setTitle(currentFood.getName());
+                if(currentFood.getName()!=null) {
+                    Picasso.get().load(currentFood.getImage()).into(food_image);
+                    //set title in appbar
+                    collapsingToolbarLayout.setTitle(currentFood.getName());
 
-                food_price.setText(currentFood.getPrice());
-                food_description.setText(currentFood.getDescription());
-                food_name.setText(currentFood.getName());
+                    food_price.setText(currentFood.getPrice());
+                    food_description.setText(currentFood.getDescription());
+                    food_name.setText(currentFood.getName());
+                }
 
 
             }
