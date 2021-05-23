@@ -20,7 +20,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TugasAkhir_Android"
         tools:replace="android:theme">
-        <activity android:name=".RestoFoodList"></activity>
+        <activity android:name=".RestoFoodDetail"></activity>
+        <activity android:name=".RestoFoodList" />
         <activity android:name=".OrderStatus" />
         <activity android:name=".FoodDetail" />
         <activity android:name=".FoodList" />
@@ -31,20 +32,9 @@
         <activity
             android:name=".RestoHomeActivity"
             android:theme="@style/Theme.TugasAkhir_Android.NoActionBar" />
-        <activity android:name=".RestoOrderDetailActivity" />
-        <activity android:name=".RestoAddMenuActivity" />
-        <activity android:name=".RestoEditMenuActivity" />
-        <activity android:name=".RestoFoodDescriptionActivity" />
         <activity android:name=".RestoMenuListActivity" />
-        <activity android:name=".RestoCompletedOrderActivity" />
         <activity android:name=".RestoOrderListActivity" />
-        <activity android:name=".RestoNewApplicantActivity" />
-        <activity android:name=".UserHistoryActivity" />
         <activity android:name=".UserCartActivity" />
-        <activity android:name=".UserMenuDetailActivity" />
-        <activity android:name=".UserOrderActivity" />
-        <activity android:name=".UserHomeActivity" />
-        <activity android:name=".NewAppliantsDetailActivity" />
         <activity android:name=".EditProfileActivity" />
         <activity android:name=".ViewProfileActivity" />
         <activity android:name=".ForgetPasswordActivity" />
